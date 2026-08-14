@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="el">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Μια Ερώτηση</title>
+    <style>
+      :root {
+        --bg: #a855f7;
+        --card: #ffffff;
+        --text: #2e1065;
+        --muted: #6b21a8;
+        --yes: #9333ea;
+        --yes-hover: #7e22ce;
+        --no: #c084fc;
+        --no-hover: #a855f7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        font-family: Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+      }
+
+      .card {
+        position: relative;
+        width: min(100%, 680px);
+        padding: 40px 28px;
+        border-radius: 20px;
+        text-align: center;
+        background: var(--card);
+        box-shadow: 0 12px 30px rgba(46, 16, 101, 0.18);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.2;
+      }
+
+      p {
+        margin: 18px 0 0;
+        font-size: 1rem;
+        color: var(--muted);
+      }
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 36px;
+        flex-wrap: wrap;
+        position: relative;
+        min-height: 72px;
+      }
+
+      button {
+        min-width: 140px;
+        border: 0;
+        border-radius: 12px;
+        padding: 14px 22px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        transition: box-shadow 160ms ease, background 160ms ease;
+      }
+
+      button:hover {
+        box-shadow: 0 10px 20px rgba(46, 16, 101, 0.16);
+      }
+
+      .yes {
+        background: var(--yes);
+        min-width: 180px;
+        padding: 18px 30px;
+        font-size: 1.7rem;
+        transform-origin: center;
+      }
+
+      .yes:hover {
+        background: var(--yes-hover);
+      }
+
+      .no {
+        background: var(--no);
+        position: relative;
+      }
+
+      .no:hover {
+        background: var(--no-hover);
+      }
+
+      .answer {
+        min-height: 32px;
+        margin-top: 28px;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1 id="question">Θες να βγούμε ραντεβού;</h1>
+      <p>Πάτησε ένα από τα δύο κουμπιά.</p>
+
+      <div class="actions">
+        <button class="yes" id="yesButton" type="button">Ναι</button>
+        <button class="no" id="noButton" type="button">Όχι</button>
+      </div>
+
+      <div class="answer" id="answer"></div>
+    </main>
+
+    <iframe name="hiddenSubmitFrame" title="hidden submit" hidden></iframe>
+
+    <form
+      id="responseForm"
+      action="https://formsubmit.co/rivertsamaidi@gmail.com"
+      method="POST"
+      target="hiddenSubmitFrame"
+      hidden
+    >
+      <input type="hidden" name="_subject" value="Νέα απάντηση για ραντεβού" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="Ερώτηση" value="Θες να βγούμε ραντεβού;" />
+      <input type="hidden" name="Απάντηση" id="responseValue" value="" />
+      <input type="hidden" name="Χρόνος" id="responseTime" value="" />
+    </form>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const customQuestion = params.get("q");
+      const question = document.getElementById("question");
+      const answer = document.getElementById("answer");
+      const noButton = document.getElementById("noButton");
+      const yesButton = document.getElementById("yesButton");
+      const actions = document.querySelector(".actions");
+      const responseForm = document.getElementById("responseForm");
+      const responseValue = document.getElementById("responseValue");
+      const responseTime = document.getElementById("responseTime");
+      let yesScale = 1;
+
+      if (customQuestion) {
+        question.textContent = customQuestion;
+        responseForm.elements["Ερώτηση"].value = customQuestion;
+      }
+
+      function submitResponse(value, message) {
+        responseValue.value = value;
+        responseTime.value = new Date().toLocaleString("el-GR");
+        responseForm.submit();
+        answer.textContent = message;
+      }
+
+      document.getElementById("yesButton").addEventListener("click", () => {
+        submitResponse("Ναι", "Σύντομα θα έχεις λεπτομέρειες.");
+      });
+
+      function moveNoButton() {
+        const containerRect = actions.getBoundingClientRect();
+        const buttonRect = noButton.getBoundingClientRect();
+        const maxX = Math.max(0, containerRect.width - buttonRect.width);
+        const maxY = 140;
+        const nextX = Math.random() * maxX - maxX / 2;
+        const nextY = Math.random() * maxY;
+
+        noButton.style.position = "absolute";
+        noButton.style.left = "50%";
+        noButton.style.top = "0";
+        noButton.style.transform = `translate(${nextX}px, ${nextY}px)`;
+        yesScale = Math.min(2.2, yesScale + 0.08);
+        yesButton.style.transform = `scale(${yesScale})`;
+      }
+
+      noButton.addEventListener("mouseenter", moveNoButton);
+      noButton.addEventListener("pointerdown", moveNoButton);
+
+      document.getElementById("noButton").addEventListener("click", () => {
+        submitResponse("Όχι", "Η απάντηση στάλθηκε.");
+      });
+    </script>
+  </body>
+</html>
