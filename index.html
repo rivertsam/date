@@ -105,12 +105,285 @@
         margin-top: 28px;
         font-size: 1rem;
         font-weight: 600;
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+      }
+
+      .answer.celebrate {
+        font-size: 1.2rem;
+        color: #7e22ce;
+      }
+
+      .answer.show {
+        animation: messageIn 700ms ease forwards;
+      }
+
+      .fireworks {
+        position: fixed;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        overflow: hidden;
+        transition: opacity 180ms ease;
+        z-index: 5;
+      }
+
+      .fireworks.show {
+        opacity: 1;
+      }
+
+      .fireworks.show::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.14);
+        animation: skyFlash 900ms ease-out 1;
+      }
+
+      .fireworks.wave-two::before {
+        animation: skyFlash 1100ms ease-out 1;
+      }
+
+      .burst {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: transparent;
+        filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.95));
+      }
+
+      .burst::before,
+      .burst::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+      }
+
+      .burst::before {
+        background:
+          radial-gradient(circle, rgba(255, 255, 255, 1) 0 14%, transparent 15%),
+          radial-gradient(circle, #f59e0b 0 9%, transparent 10%) 50% 0 / 100% 100%,
+          radial-gradient(circle, #ec4899 0 9%, transparent 10%) 100% 50% / 100% 100%,
+          radial-gradient(circle, #8b5cf6 0 9%, transparent 10%) 0 50% / 100% 100%,
+          radial-gradient(circle, #22d3ee 0 9%, transparent 10%) 50% 100% / 100% 100%,
+          radial-gradient(circle, #f472b6 0 8%, transparent 9%) 80% 18% / 100% 100%,
+          radial-gradient(circle, #c084fc 0 8%, transparent 9%) 18% 82% / 100% 100%,
+          radial-gradient(circle, #fde047 0 8%, transparent 9%) 82% 82% / 100% 100%,
+          radial-gradient(circle, #a855f7 0 8%, transparent 9%) 18% 18% / 100% 100%,
+          radial-gradient(circle, #fb7185 0 8%, transparent 9%) 68% 12% / 100% 100%,
+          radial-gradient(circle, #34d399 0 8%, transparent 9%) 12% 65% / 100% 100%,
+          radial-gradient(circle, #60a5fa 0 8%, transparent 9%) 88% 36% / 100% 100%;
+        transform: scale(0.2);
+        opacity: 0;
+        animation: explode 1200ms ease-out infinite;
+      }
+
+      .burst::after {
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.9), transparent 70%);
+        transform: scale(0.15);
+        opacity: 0;
+        animation: flash 1200ms ease-out infinite;
+      }
+
+      .burst.one {
+        top: 14%;
+        left: 16%;
+      }
+
+      .burst.two {
+        top: 30%;
+        left: 50%;
+      }
+
+      .burst.three {
+        top: 18%;
+        right: 14%;
+      }
+
+      .burst.four {
+        top: 58%;
+        left: 22%;
+      }
+
+      .burst.five {
+        top: 64%;
+        right: 20%;
+      }
+
+      .burst.six {
+        top: 10%;
+        left: 42%;
+      }
+
+      .burst.seven {
+        top: 48%;
+        right: 10%;
+      }
+
+      .burst.eight {
+        top: 72%;
+        left: 48%;
+      }
+
+      .burst.nine {
+        top: 38%;
+        left: 8%;
+      }
+
+      .burst.two::before,
+      .burst.two::after {
+        animation-delay: 220ms;
+      }
+
+      .burst.three::before,
+      .burst.three::after {
+        animation-delay: 420ms;
+      }
+
+      .burst.four::before,
+      .burst.four::after {
+        animation-delay: 700ms;
+      }
+
+      .burst.five::before,
+      .burst.five::after {
+        animation-delay: 940ms;
+      }
+
+      .burst.six::before,
+      .burst.six::after {
+        animation-delay: 120ms;
+      }
+
+      .burst.seven::before,
+      .burst.seven::after {
+        animation-delay: 560ms;
+      }
+
+      .burst.eight::before,
+      .burst.eight::after {
+        animation-delay: 820ms;
+      }
+
+      .burst.nine::before,
+      .burst.nine::after {
+        animation-delay: 1080ms;
+      }
+
+      .fireworks.wave-two .burst.one::before,
+      .fireworks.wave-two .burst.one::after {
+        animation-delay: 140ms;
+      }
+
+      .fireworks.wave-two .burst.two::before,
+      .fireworks.wave-two .burst.two::after {
+        animation-delay: 680ms;
+      }
+
+      .fireworks.wave-two .burst.three::before,
+      .fireworks.wave-two .burst.three::after {
+        animation-delay: 260ms;
+      }
+
+      .fireworks.wave-two .burst.four::before,
+      .fireworks.wave-two .burst.four::after {
+        animation-delay: 960ms;
+      }
+
+      .fireworks.wave-two .burst.five::before,
+      .fireworks.wave-two .burst.five::after {
+        animation-delay: 420ms;
+      }
+
+      .fireworks.wave-two .burst.six::before,
+      .fireworks.wave-two .burst.six::after {
+        animation-delay: 820ms;
+      }
+
+      .fireworks.wave-two .burst.seven::before,
+      .fireworks.wave-two .burst.seven::after {
+        animation-delay: 120ms;
+      }
+
+      .fireworks.wave-two .burst.eight::before,
+      .fireworks.wave-two .burst.eight::after {
+        animation-delay: 740ms;
+      }
+
+      .fireworks.wave-two .burst.nine::before,
+      .fireworks.wave-two .burst.nine::after {
+        animation-delay: 520ms;
+      }
+
+      @keyframes explode {
+        from {
+          transform: scale(0.2);
+          opacity: 0;
+        }
+
+        20% {
+          opacity: 1;
+        }
+
+        100% {
+          transform: scale(9.5);
+          opacity: 0;
+        }
+      }
+
+      @keyframes flash {
+        from {
+          transform: scale(0.1);
+          opacity: 0;
+        }
+
+        15% {
+          opacity: 0.95;
+        }
+
+        100% {
+          transform: scale(6);
+          opacity: 0;
+        }
+      }
+
+      @keyframes skyFlash {
+        from {
+          opacity: 0;
+        }
+
+        20% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes messageIn {
+        0% {
+          opacity: 0;
+          transform: translateY(14px) scale(0.92);
+        }
+
+        60% {
+          opacity: 1;
+          transform: translateY(-4px) scale(1.04);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
       }
     </style>
   </head>
   <body>
     <main class="card">
-      <h1 id="question">Θες να βγούμε ραντεβού;</h1>
+      <h1 id="question">Θα ήθελες να σε βγάλω ραντεβού;</h1>
       <p>Πάτησε ένα από τα δύο κουμπιά.</p>
 
       <div class="actions">
@@ -119,6 +392,17 @@
       </div>
 
       <div class="answer" id="answer"></div>
+      <div class="fireworks" id="fireworks" aria-hidden="true">
+        <div class="burst one"></div>
+        <div class="burst two"></div>
+        <div class="burst three"></div>
+        <div class="burst four"></div>
+        <div class="burst five"></div>
+        <div class="burst six"></div>
+        <div class="burst seven"></div>
+        <div class="burst eight"></div>
+        <div class="burst nine"></div>
+      </div>
     </main>
 
     <iframe name="hiddenSubmitFrame" title="hidden submit" hidden></iframe>
@@ -133,7 +417,7 @@
       <input type="hidden" name="_subject" value="Νέα απάντηση για ραντεβού" />
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="Ερώτηση" value="Θες να βγούμε ραντεβού;" />
+      <input type="hidden" name="Ερώτηση" value="Θα ήθελες να σε βγάλω ραντεβού;" />
       <input type="hidden" name="Απάντηση" id="responseValue" value="" />
       <input type="hidden" name="Χρόνος" id="responseTime" value="" />
     </form>
@@ -149,22 +433,40 @@
       const responseForm = document.getElementById("responseForm");
       const responseValue = document.getElementById("responseValue");
       const responseTime = document.getElementById("responseTime");
+      const fireworks = document.getElementById("fireworks");
       let yesScale = 1;
+      let fireworksTimeout;
 
       if (customQuestion) {
         question.textContent = customQuestion;
         responseForm.elements["Ερώτηση"].value = customQuestion;
       }
 
-      function submitResponse(value, message) {
+      function submitResponse(value, message, celebrate = false) {
         responseValue.value = value;
         responseTime.value = new Date().toLocaleString("el-GR");
         responseForm.submit();
         answer.textContent = message;
+        answer.classList.remove("show");
+        void answer.offsetWidth;
+        answer.classList.add("show");
+        answer.classList.toggle("celebrate", celebrate);
+        fireworks.classList.toggle("show", celebrate);
+        fireworks.classList.remove("wave-two");
+
+        if (fireworksTimeout) {
+          clearTimeout(fireworksTimeout);
+        }
+
+        if (celebrate) {
+          fireworksTimeout = setTimeout(() => {
+            fireworks.classList.add("wave-two");
+          }, 650);
+        }
       }
 
       document.getElementById("yesButton").addEventListener("click", () => {
-        submitResponse("Ναι", "Σύντομα θα έχεις λεπτομέρειες.");
+        submitResponse("Ναι", "Σύντομα θα έχεις πληροφορίες.", true);
       });
 
       function moveNoButton() {
